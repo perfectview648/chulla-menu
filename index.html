@@ -76,7 +76,7 @@ a{color:inherit;text-decoration:none;}
   background:radial-gradient(ellipse at top, rgba(212,162,76,0.25), transparent 60%);
 }
 .brand-row{
-  display:flex; align-items:center; gap:12px;
+  display:flex; align-items:center;
   position:relative; z-index:2;
   opacity:0; animation:riseIn 0.6s var(--ease) 0.1s forwards;
 }
@@ -251,16 +251,44 @@ a{color:inherit;text-decoration:none;}
 .mini-search svg{color:var(--burgundy); opacity:0.6; flex-shrink:0;}
 .mini-search input{flex:1; border:none; outline:none; background:transparent; font-size:14px;}
 
-.cat-nav{
-  display:flex; gap:8px; overflow-x:auto; scrollbar-width:none; padding:2px 0 14px;
+.cat-dropdown-wrap{position:relative; padding-bottom:14px;}
+.cat-dropdown-btn{
+  width:100%; display:flex; align-items:center; gap:10px;
+  background:var(--card); border:1px solid var(--line); border-radius:16px;
+  padding:13px 16px; box-shadow:var(--shadow-sm);
+  transition:border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
 }
-.cat-nav::-webkit-scrollbar{display:none;}
-.cat-pill{
-  flex-shrink:0; padding:9px 16px; border-radius:20px; font-size:13px; font-weight:600;
-  background:var(--card); color:var(--charcoal); border:1px solid var(--line);
-  transition:all 0.25s var(--ease); white-space:nowrap;
+.cat-dropdown-btn.open{border-color:var(--burgundy); box-shadow:0 4px 14px rgba(107,34,34,0.16);}
+.cat-dropdown-icon{font-size:17px; flex-shrink:0;}
+.cat-dropdown-label{flex:1; text-align:left; font-size:14.5px; font-weight:700; color:var(--charcoal);}
+.cat-dropdown-chev{color:var(--burgundy); flex-shrink:0; transition:transform 0.28s var(--ease);}
+.cat-dropdown-chev.open{transform:rotate(180deg);}
+.cat-dropdown-panel{
+  position:absolute; top:calc(100% - 8px); left:0; right:0; z-index:50;
+  background:var(--card); border-radius:18px; box-shadow:var(--shadow-lg);
+  border:1px solid var(--line); overflow:hidden;
+  max-height:0; opacity:0; pointer-events:none;
+  transition:max-height 0.32s var(--ease), opacity 0.22s var(--ease);
 }
-.cat-pill.active{background:var(--burgundy); color:#fff; border-color:var(--burgundy); box-shadow:0 4px 12px rgba(107,34,34,0.28);}
+.cat-dropdown-panel.open{max-height:520px; opacity:1; pointer-events:auto; overflow-y:auto;}
+.cat-dropdown-item{
+  display:flex; align-items:center; gap:12px; width:100%; padding:13px 16px;
+  border-bottom:1px solid var(--line); transition:background 0.15s;
+}
+.cat-dropdown-item:last-child{border-bottom:none;}
+.cat-dropdown-item:active{background:var(--cream);}
+.cat-dropdown-item.active{background:#FBEFE2;}
+.cat-dropdown-item-icon{font-size:18px; width:26px; text-align:center; flex-shrink:0;}
+.cat-dropdown-item-text{flex:1; text-align:left;}
+.cat-dropdown-item-name{font-size:14px; font-weight:700; color:var(--charcoal);}
+.cat-dropdown-item-count{font-size:11px; color:#B8A99C; margin-top:1px;}
+.cat-dropdown-item-check{color:var(--burgundy); flex-shrink:0; opacity:0;}
+.cat-dropdown-item.active .cat-dropdown-item-check{opacity:1;}
+.cat-dropdown-scrim{
+  position:fixed; inset:0; z-index:35; background:rgba(45,12,12,0.25);
+  opacity:0; pointer-events:none; transition:opacity 0.25s var(--ease);
+}
+.cat-dropdown-scrim.open{opacity:1; pointer-events:auto;}
 
 .menu-content{padding:6px 20px 100px;}
 .menu-search-results{padding:14px 20px 100px;}
@@ -280,9 +308,17 @@ a{color:inherit;text-decoration:none;}
 .cat-banner-title{font-family:'Fraunces',serif; font-size:24px; font-weight:600;}
 .cat-banner-desc{font-size:12.5px; color:rgba(255,248,242,0.82); margin-top:3px;}
 
+.category-section{
+  margin-bottom:8px;
+  padding-bottom:32px;
+  border-bottom:1px solid var(--line);
+  scroll-margin-top:150px;
+}
+.category-section:last-child{border-bottom:none;}
 .section-cat-title{
-  font-family:'Fraunces',serif; font-size:19px; font-weight:600; margin:26px 0 12px;
-  display:flex; align-items:center; gap:8px; scroll-margin-top:120px;
+  font-family:'Fraunces',serif; font-size:15px; font-weight:600; margin:0 0 14px;
+  display:flex; align-items:center; gap:8px;
+  color:#B8A99C; text-transform:uppercase; letter-spacing:0.06em; font-size:11.5px;
 }
 
 /* Menu item cards */
@@ -367,9 +403,9 @@ a{color:inherit;text-decoration:none;}
 .dish-hero{height:260px; position:relative;}
 .dish-hero img{width:100%;height:100%;object-fit:cover;}
 .dish-close{
-  position:absolute; top:16px; right:16px; width:38px;height:38px;border-radius:50%;
+  position:absolute; top:16px; right:16px; left:auto; width:38px;height:38px;border-radius:50%;
   background:rgba(255,255,255,0.92); display:flex;align-items:center;justify-content:center;
-  box-shadow:0 4px 12px rgba(0,0,0,0.15); color:var(--charcoal); z-index:2;
+  box-shadow:0 4px 12px rgba(0,0,0,0.15); color:var(--charcoal); z-index:5;
 }
 .dish-body{padding:22px 22px 40px;}
 .dish-badges{display:flex; gap:8px; margin-bottom:10px;}
@@ -453,7 +489,7 @@ a{color:inherit;text-decoration:none;}
     <div class="landing-hero">
       <div class="brand-row">
         <div class="brand-logo-pill">
-          <img src="/images/full-logo.png" alt="Chullah Express">
+        <img src="/images/full-logo.png" alt="Chullah Express">     
         </div>
       </div>
       <div class="hero-spacer"></div>
@@ -527,8 +563,16 @@ a{color:inherit;text-decoration:none;}
           <input type="text" id="menu-search-input" placeholder="Search dishes, e.g. chicken, spicy…" oninput="onSearch(this.value)">
         </div>
       </div>
-      <div class="cat-nav no-scrollbar" id="cat-nav"></div>
+      <div class="cat-dropdown-wrap">
+        <button class="cat-dropdown-btn ripple" id="cat-dropdown-btn" onclick="toggleCatDropdown()">
+          <span class="cat-dropdown-icon" id="cat-dropdown-icon">📋</span>
+          <span class="cat-dropdown-label" id="cat-dropdown-label">All Categories</span>
+          <svg class="cat-dropdown-chev" id="cat-dropdown-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="cat-dropdown-panel" id="cat-dropdown-panel"></div>
+      </div>
     </div>
+    <div class="cat-dropdown-scrim" id="cat-dropdown-scrim" onclick="closeCatDropdown()"></div>
 
     <div class="menu-content" id="menu-content"></div>
     <div class="menu-search-results" id="menu-search-results" style="display:none;"></div>
