@@ -180,6 +180,7 @@ function renderMenuContent(){
         <div class="cat-banner" id="cat-${cat.id}-banner">
           <img class="lazy-img" loading="lazy" src="${cat.banner}" alt="${cat.name}" onload="this.classList.add('loaded')">
           <div class="cat-banner-overlay">
+            <div class="jali-texture"></div>
             <div class="cat-banner-title">${cat.emoji} ${cat.name}</div>
             <div class="cat-banner-desc">${cat.desc}</div>
           </div>
@@ -198,6 +199,7 @@ function renderWeekendSection(cat, items){
   <div class="weekend-hero" id="cat-${cat.id}">
     <img src="${cat.banner}" alt="Weekend Specials">
     <div class="weekend-hero-overlay">
+      <div class="charminar-mark"></div>
       <div class="gold-tag">✦ Limited &amp; Exclusive</div>
       <div class="weekend-hero-title">Weekend Specials</div>
     </div>
