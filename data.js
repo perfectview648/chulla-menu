@@ -1,6 +1,5 @@
 // ============ CATEGORY DEFINITIONS ============
 const CATEGORIES = [
-  { id:"weekend-food-specials", name:"Weekend Specials", emoji:"🎉", desc:"Limited-batch Hyderabadi weekend classics", banner:"https://images.unsplash.com/photo-1631515243349-e0cb75fb8d3a?w=800&q=80" },
   { id:"light-fare", name:"Light Fare", emoji:"🥪", desc:"Sandwiches, rolls & quick bites", banner:"https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=800&q=80" },
   { id:"deg-se", name:"Deg Se", emoji:"🍲", desc:"Traditional slow-cooked Hyderabadi biryani", banner:"https://images.unsplash.com/photo-1563379091339-03246963d96c?w=800&q=80" },
   { id:"tave-se", name:"Tave Se", emoji:"🍗", desc:"Fired fresh on the tava & tandoor", banner:"https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=800&q=80" },
@@ -9,6 +8,7 @@ const CATEGORIES = [
   { id:"meetha", name:"Meetha", emoji:"🍮", desc:"Traditional Hyderabadi desserts", banner:"https://images.unsplash.com/photo-1551024506-0bccd828d307?w=800&q=80" },
   { id:"platters", name:"Platters", emoji:"🍽️", desc:"Feasts built for sharing", banner:"https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=800&q=80" },
   { id:"drinks", name:"Drinks", emoji:"🥤", desc:"Chai, cold drinks & Hyderabadi refreshers", banner:"https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=800&q=80" },
+  { id:"weekend-food-specials", name:"Weekend Specials", emoji:"🎉", desc:"Limited-batch Hyderabadi weekend classics", banner:"https://images.unsplash.com/photo-1631515243349-e0cb75fb8d3a?w=800&q=80" },
   { id:"catering-services", name:"Catering Services", emoji:"🥘", desc:"Trays for events, sized to serve a crowd", banner:"https://images.unsplash.com/photo-1555244162-803834f70033?w=800&q=80" },
 ];
 
