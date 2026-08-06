@@ -100,44 +100,93 @@ function showFavoritesSection(){
 
 // ============ MENU SCREEN ============
 let currentCatFilter = 'all';
+let dropdownOpen = false;
 
-function renderCatNav(){
-  const nav = document.getElementById('cat-nav');
-  const pills = [{id:'all', name:'Popular', emoji:''}, ...CATEGORIES.map(c=>({id:c.id, name:c.name}))];
-  nav.innerHTML = pills.map(p => `<button class="cat-pill ${p.id===currentCatFilter?'active':''}" data-pill="${p.id}" onclick="jumpToCategory('${p.id}')">${p.name}</button>`).join('');
+function renderCatDropdown(){
+  const panel = document.getElementById('cat-dropdown-panel');
+  const allCount = ITEMS.length;
+  const options = [{id:'all', name:'All Categories', emoji:'📋', count:allCount}, ...CATEGORIES.map(c=>({id:c.id, name:c.name, emoji:c.emoji, count:getItemsByCategory(c.id).length}))];
+
+  panel.innerHTML = options.map(o => `
+    <button class="cat-dropdown-item ${o.id===currentCatFilter?'active':''}" onclick="selectCategory('${o.id}')">
+      <div class="cat-dropdown-item-icon">${o.emoji}</div>
+      <div class="cat-dropdown-item-text">
+        <div class="cat-dropdown-item-name">${o.name}</div>
+        <div class="cat-dropdown-item-count">${o.count} item${o.count!==1?'s':''}</div>
+      </div>
+      <svg class="cat-dropdown-item-check" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+    </button>`).join('');
+
+  const selected = options.find(o=>o.id===currentCatFilter) || options[0];
+  document.getElementById('cat-dropdown-icon').textContent = selected.emoji;
+  document.getElementById('cat-dropdown-label').textContent = selected.name;
+}
+
+function toggleCatDropdown(){
+  dropdownOpen ? closeCatDropdown() : openCatDropdown();
+}
+function openCatDropdown(){
+  dropdownOpen = true;
+  document.getElementById('cat-dropdown-panel').classList.add('open');
+  document.getElementById('cat-dropdown-btn').classList.add('open');
+  document.getElementById('cat-dropdown-chev').classList.add('open');
+  document.getElementById('cat-dropdown-scrim').classList.add('open');
+}
+function closeCatDropdown(){
+  dropdownOpen = false;
+  document.getElementById('cat-dropdown-panel').classList.remove('open');
+  document.getElementById('cat-dropdown-btn').classList.remove('open');
+  document.getElementById('cat-dropdown-chev').classList.remove('open');
+  document.getElementById('cat-dropdown-scrim').classList.remove('open');
+}
+
+function selectCategory(id){
+  currentCatFilter = id;
+  closeCatDropdown();
+  renderCatDropdown();
+  renderMenuContent();
+  window.scrollTo({top:0, behavior:'smooth'});
 }
 
 function renderMenuContent(){
   const content = document.getElementById('menu-content');
   let html = '';
 
-  CATEGORIES.forEach(cat => {
+  const catsToShow = currentCatFilter === 'all'
+    ? CATEGORIES
+    : CATEGORIES.filter(c => c.id === currentCatFilter);
+
+  catsToShow.forEach(cat => {
     const items = getItemsByCategory(cat.id);
     if(cat.id === 'weekend-food-specials'){
-      html += renderWeekendSection(cat, items);
+      html += `<div class="category-section">${renderWeekendSection(cat, items)}</div>`;
     } else if(cat.id === 'catering-services'){
       // Catering gets its own experience; show a teaser card that routes there
       html += `
-      <div class="section-cat-title" id="cat-${cat.id}">${cat.emoji} ${cat.name}</div>
-      <button class="cat-card ripple" style="width:100%;" onclick="openCatering()">
-        <div class="cat-icon">${cat.emoji}</div>
-        <div class="cat-info">
-          <div class="cat-name">Planning an Event?</div>
-          <div class="cat-desc">View our full catering menu &amp; tray sizes</div>
-        </div>
-        <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-      </button>`;
+      <div class="category-section">
+        <div class="section-cat-title" id="cat-${cat.id}">${cat.emoji} ${cat.name}</div>
+        <button class="cat-card ripple" style="width:100%;" onclick="openCatering()">
+          <div class="cat-icon">${cat.emoji}</div>
+          <div class="cat-info">
+            <div class="cat-name">Planning an Event?</div>
+            <div class="cat-desc">View our full catering menu &amp; tray sizes</div>
+          </div>
+          <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>`;
     } else {
       html += `
-      <div class="cat-banner" id="cat-${cat.id}-banner">
-        <img class="lazy-img" loading="lazy" src="${cat.banner}" alt="${cat.name}" onload="this.classList.add('loaded')">
-        <div class="cat-banner-overlay">
-          <div class="cat-banner-title">${cat.emoji} ${cat.name}</div>
-          <div class="cat-banner-desc">${cat.desc}</div>
+      <div class="category-section">
+        <div class="cat-banner" id="cat-${cat.id}-banner">
+          <img class="lazy-img" loading="lazy" src="${cat.banner}" alt="${cat.name}" onload="this.classList.add('loaded')">
+          <div class="cat-banner-overlay">
+            <div class="cat-banner-title">${cat.emoji} ${cat.name}</div>
+            <div class="cat-banner-desc">${cat.desc}</div>
+          </div>
         </div>
-      </div>
-      <div class="section-cat-title" id="cat-${cat.id}">Menu · ${items.length} items</div>
-      <div class="item-list">${items.map(itemCardHTML).join('')}</div>`;
+        <div class="section-cat-title" id="cat-${cat.id}">Menu · ${items.length} items</div>
+        <div class="item-list">${items.map(itemCardHTML).join('')}</div>
+      </div>`;
     }
   });
 
@@ -174,37 +223,29 @@ function renderWeekendSection(cat, items){
   return html;
 }
 
-function jumpToCategory(id){
-  currentCatFilter = id;
-  renderCatNav();
-  if(id === 'all'){
-    document.getElementById('menu-content').scrollIntoView({behavior:'smooth', block:'start'});
-    window.scrollTo({top:0, behavior:'smooth'});
-    return;
-  }
-  const target = document.getElementById(`cat-${id}-banner`) || document.getElementById(`cat-${id}`);
-  if(target) target.scrollIntoView({behavior:'smooth', block:'start'});
-}
-
 // ============ SEARCH ============
 let searchDebounce;
 function onSearch(query){
+  closeCatDropdown();
   clearTimeout(searchDebounce);
   searchDebounce = setTimeout(()=>doSearch(query.trim().toLowerCase()), 90);
 }
 function doSearch(q){
   const menuContent = document.getElementById('menu-content');
   const resultsBox = document.getElementById('menu-search-results');
-  const catNav = document.getElementById('cat-nav').parentElement;
+
+  const dropdownWrap = document.querySelector('.cat-dropdown-wrap');
 
   if(!q){
     menuContent.style.display = '';
     resultsBox.style.display = 'none';
+    if(dropdownWrap) dropdownWrap.style.display = '';
     return;
   }
 
   menuContent.style.display = 'none';
   resultsBox.style.display = 'block';
+  if(dropdownWrap) dropdownWrap.style.display = 'none';
 
   const matches = ITEMS.filter(item => {
     const hay = (item.name + ' ' + item.desc + ' ' + (item.keywords||[]).join(' ') + ' ' + (item.veg ? 'vegetarian veg' : 'non-veg')).toLowerCase();
@@ -247,11 +288,9 @@ function goHome(){
 function openMenu(catId){
   switchScreen('screen-menu');
   currentCatFilter = catId || 'all';
-  renderCatNav();
+  closeCatDropdown();
+  renderCatDropdown();
   renderMenuContent();
-  if(catId && catId !== 'all'){
-    setTimeout(()=>jumpToCategory(catId), 80);
-  }
 }
 
 function openCatering(){
