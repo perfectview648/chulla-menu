@@ -8,8 +8,8 @@ const CATEGORIES = [
   { id:"rice-and-naan", name:"Rice & Naan", emoji:"🍞", desc:"Tandoor breads & fragrant rice", banner:"https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800&q=80" },
   { id:"meetha", name:"Meetha", emoji:"🍮", desc:"Traditional Hyderabadi desserts", banner:"https://images.unsplash.com/photo-1551024506-0bccd828d307?w=800&q=80" },
   { id:"platters", name:"Platters", emoji:"🍽️", desc:"Feasts built for sharing", banner:"https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=800&q=80" },
-  { id:"catering-services", name:"Catering Services", emoji:"🥘", desc:"Trays for events, sized to serve a crowd", banner:"https://images.unsplash.com/photo-1555244162-803834f70033?w=800&q=80" },
   { id:"drinks", name:"Drinks", emoji:"🥤", desc:"Chai, cold drinks & Hyderabadi refreshers", banner:"https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=800&q=80" },
+  { id:"catering-services", name:"Catering Services", emoji:"🥘", desc:"Trays for events, sized to serve a crowd", banner:"https://images.unsplash.com/photo-1555244162-803834f70033?w=800&q=80" },
 ];
 
 // Stock food photography (Unsplash, category-appropriate) reused sensibly across similar dishes
