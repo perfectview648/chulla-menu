@@ -29,7 +29,7 @@ const IMG = {
   jerkChicken: "/images/jerk-chicken-pv.png",
   paneer: "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=600&q=80",
   dopyazah: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=600&q=80",
-  laganChicken: "/images/lagan-chicken-pv",
+  laganChicken: "/images/lagan-chicken-pv.png",
   butterChicken: "https://images.unsplash.com/photo-1588166524941-3bf61a9c41db?w=600&q=80",
   dal: "/images/khatti-dal-pv.png",
   mirchiSalan: "/images/mirchi-ka-salan-pv.png",
