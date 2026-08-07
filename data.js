@@ -22,7 +22,7 @@ const IMG = {
   quesadilla: "/images/chicken-q-pv.png",
   samosa: "/images/potli-samosa-pv.png",
   lukhmi: "/images/hyderabadi-lukhmi-pv.png",
-  chickenRoll: "/images/chicken-roll-pv.png",
+  chickenRoll: "/images/chicken-roll-pv.PNG",
   chicken65: "https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=600&q=80",
   talavaGosht: "/images/talva-ghost-pv.png",
   talavaMurg: "/images/talva-chicken-pv.png",
