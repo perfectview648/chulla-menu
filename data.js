@@ -14,7 +14,7 @@ const CATEGORIES = [
 
 // Stock food photography (Unsplash, category-appropriate) reused sensibly across similar dishes
 const IMG = {
-  biryaniMutton: "/images/mutton-dum-pv.png",
+  biryaniMutton: "/images/mutton-dum-pv.jpg",
   biryaniChicken: "/images/chicken-dum-pv.png  ",
   haleem: "https://images.unsplash.com/photo-1631292784640-2b24be784d5d?w=600&q=80",
   nahari: "https://images.unsplash.com/photo-1574653853027-5382a3d23a8d?w=600&q=80",
