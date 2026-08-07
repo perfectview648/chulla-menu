@@ -18,7 +18,7 @@ const IMG = {
   biryaniChicken: "/images/chicken-dum-pv.png  ",
   haleem: "https://images.unsplash.com/photo-1631292784640-2b24be784d5d?w=600&q=80",
   nahari: "https://images.unsplash.com/photo-1574653853027-5382a3d23a8d?w=600&q=80",
-  sandwich: "/images/roast-beef-pv.png",
+  sandwich: "/images/roast-beef-pv.jpg",
   quesadilla: "/images/chicken-q-pv.png",
   samosa: "/images/potli-samosa-pv.png",
   lukhmi: "/images/hyderabadi-lukhmi-pv",
