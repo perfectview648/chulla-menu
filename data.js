@@ -37,7 +37,7 @@ const IMG = {
   naan: "/images/butter-naan-pv.png",
   paratha: "/images/lachha-pv.png",
   qubani: "/images/qubani-pv.png.png",
-  dabalMeetha: "/images/dabal-pv.png",
+  dabalMeetha: "/images/dabal-pv.PNG",
   malaiMeva: "/images/malai-pv.PNG",
   creme: "/images/brulee-pv.png",
   gilEFirdaus: "/images/gil-e-firdaus-pv.png",
