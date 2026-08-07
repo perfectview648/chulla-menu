@@ -26,7 +26,7 @@ const IMG = {
   chicken65: "https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=600&q=80",
   talavaGosht: "/images/talva-ghost-pv.png",
   talavaMurg: "/images/talva-chicken-pv.png",
-  jerkChicken: "/images/jerk-chicken-pv.png",
+  jerkChicken: "/images/jerk-chicken-pv.jpg",
   paneer: "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=600&q=80",
   dopyazah: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=600&q=80",
   laganChicken: "/images/lagan-chicken-pv.png",
